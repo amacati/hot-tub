@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <meta name="description" content="">
+	    <meta name="author" content="">
+
+		<!-- Make sure to actually insert the sad_sun image sometime -->
+	    <link rel="icon" href="{{url_for('static', filename='hot_tub_earth.png')}}">
+		<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+
+        <title>About Page</title>
+	</head>
+	
+	<body>
+		<div class="top_banner">
+			<a href="/">Home</a>
+			<h1>Hot-Tub</h1>
+			<a class='selected'>About</a>
+		</div>
+
+		<div class="logo_and_text">
+			<div class="logo">
+				<img src="{{url_for('static', filename='hot_tub_logo.png')}}">
+			</div>
+
+			<div class="about">
+			  <h1 class="display-3">About Hot Tub</h1>
+			  <p class="lead">Hot Tub is a final project for the Data Intensive
+			  	Computing lecture at KTH 2020. The aim of this project was to
+			  	build a data processing pipeline using high-scalability
+				frameworks such as Spark. We chose to implement a real-time
+				global warming monitor. Our heatmap shows the temperature
+				difference of the last 24 hours compared to the preindustrial
+				average on that day. This way, we hope to make climate change
+				more tangible for people not accustomed to the methods and
+				language of scientific analysis. The reference model is
+				generated from historical data stemming from the Berkeley Earth
+				dataset. Our real-time model gets synthesized from records we
+				obain from the from the OpenWeatherMapAPI. Each sampling point
+				gets send over Kafka and consumed by a SparkStreaming node which
+				formats and inserts the entries into a Cassandra database. In
+				parallel, our interpolation node uses pyspark and scipy to load
+				the averaged samples from the database, build the model by
+				interpolation and produce a temperature difference heatmap. This
+				model is displayed in our webserver.
+			  </p>
+			</div>
+		</div>
+		
+	</body>
+</html>

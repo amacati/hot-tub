@@ -1,0 +1,66 @@
+version: '3'
+services:
+  zookeeper:
+    image: zookeeper:latest
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_SERVER_ID: 1
+      ZOOKEEPER_CLIENT_PORT: 22181
+      ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_INIT_LIMIT: 5
+      ZOOKEEPER_SYNC_LIMIT: 2
+      ZOOKEEPER_SERVERS: localhost:22888:23888;localhost:32888:33888;localhost:42888:43888
+    volumes: 
+      - ".:/mnt/host/"
+    network_mode: host
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka
+    depends_on:
+      - "zookeeper"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: localhost:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_LOG_RETENTION_MS: 10000  # Experimental!
+    ports:
+      - "9092:9092"
+    network_mode: host
+  cassandra:
+    image: cassandra:latest
+    container_name: cassandra
+    environment:
+      - HEAP_NEWSIZE=128M
+      - MAX_HEAP_SIZE=1536M
+    volumes: 
+      - ./data:/var/lib/cassandra
+    network_mode: host
+  batch_processing:
+    build: ./src/batch_processing/
+    container_name: batch_processing
+    volumes:
+      - ./data:/usr/data
+      - ./src:/usr/src
+    network_mode: host
+    depends_on:
+      - "cassandra"
+  stream_processing:
+    build: ./src/stream_processing/
+    container_name: stream_processing
+    network_mode: host
+    depends_on:
+      - "kafka"
+      - "cassandra"
+  api_stream:
+    build: ./src/api_stream/
+    container_name: api_stream
+    network_mode: host
+    depends_on:
+      - "kafka"
+  webserver:
+    build: ./src/webserver/
+    container_name: webserver
+    volumes:
+    - ./src/webserver:/usr/src/app
+    ports:
+      - "5000:5000"

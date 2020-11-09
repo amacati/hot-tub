@@ -1,0 +1,73 @@
+body {
+	margin: 0;
+}
+
+a {
+ text-decoration: none;
+}
+
+
+div {
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+
+.top_banner {
+	background-color: #000000;
+}
+
+.top_banner a {
+	width: 33%;
+	color: #FFFFFF;
+	display: inline-block;
+	text-align: center;
+}
+
+
+.top_banner h1 {
+	width: 33%;
+	color: #FFFFFF;
+	font-size: 46px;
+	display: inline-block;
+	text-align: center;
+}
+
+.logo {
+	width: 45%;
+	display: inline-block;
+	margin-left: 5%;
+}
+
+.logo img {
+	width: 100%;
+}
+
+.about {
+	width: 45%;
+	height: 100%;
+	display: inline-block;
+}
+
+.about h1 {
+	font-size: 54px;
+}
+
+.about p {
+	font-size: 28px;
+}
+
+.selected {
+	text-decoration: underline;	
+}
+
+.temperature_map {
+	position: relative;
+	width: 100%;
+	display: inline-block;
+}
+
+.temperature_map img {
+	width: 86%;
+	margin-left: 7%;
+}

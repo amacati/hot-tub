@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <meta name="description" content="">
+	    <meta name="author" content="">
+
+		<!-- Automatically refresh the webpage every 20 seconds -->
+		<meta http-equiv="refresh" content="20" >
+
+		<!-- Make sure to actually insert the sad_sun image sometime -->
+	    <link rel="icon" href="{{url_for('static', filename='hot_tub_earth.png')}}">
+		<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+
+        <title>Hot Tub</title>
+	</head>
+	
+	<body>
+		<div class="top_banner">
+			<a class="selected">Home</a>
+			<h1>Hot-Tub</h1>
+			<a href="/about">About</a>
+		</div>
+		<div class="temperature_map">
+			<img src="{{ temperature_map }}">
+		</div>
+	</body>
+</html>
